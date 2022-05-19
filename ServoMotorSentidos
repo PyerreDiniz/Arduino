@@ -1,0 +1,42 @@
+/ IFPB
+// Curso: Bachalerado em Engenharia de controle  e automação
+// Professor: Raphaell Maciela de Souza
+// Aluno: Pyerre Lima Diniz
+// Data: 19/05/22
+// Objetivos: Servo motor horário e anti-horário
+
+
+#include <Servo.h>
+
+Servo meuServo;
+String incomingByte ;  
+
+int angulo;
+
+void setup() {
+  Serial.begin(9600);
+  meuServo.attach(5); 
+}
+void loop() {
+
+  if (Serial.available() > 0) {
+
+  incomingByte = Serial.readStringUntil('\n');
+
+    if (incomingByte == "h") {
+	for (angulo = 0; angulo < 180; angulo += 1) { 
+	meuServo.write(angulo); 
+    delay(5);}
+    }
+
+    if (incomingByte == "ah") {
+    for (angulo = 180; angulo > 1; angulo -= 1) { 
+	meuServo.write(angulo); 
+    delay(5);}
+    }
+      
+    else{ 
+      Serial.write("invald input");
+    }   
+  }
+}
