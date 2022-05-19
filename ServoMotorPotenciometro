@@ -1,0 +1,27 @@
+//Biblioteca para utilizar os Servos Motores
+#include <Servo.h>
+
+int pinoServo = 5;
+
+Servo servo1;
+
+void setup()
+{
+	//Fazer a indicação de qual pino o servo motor está ligado
+	servo1.attach(pinoServo);
+}
+
+void loop()
+{	//Recebe o valor do potênciometro
+	int angulo = analogRead(0);
+  
+  	//Mapeação dos valores para encontar o ângulo 
+ 	angulo = map(angulo,0,1023,0,180);
+      
+	//Método para escrever no servo motor
+	//(Passamos a angulação como escrita)
+	servo1.write(angulo);
+  
+  	delay(20);
+  
+}
